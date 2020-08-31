@@ -19,18 +19,47 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
     Integer diskValue, diskValueMin, diskSumMed, diskAmountMed, diskValueMax;
     Integer ramValue, ramValueMin, ramSumMed, ramAmountMed, ramValueMax;
     Integer virtualValue, virtualValueMin, virtualSumMed,virtualAmountMed, virtualValueMax;
+    Double cpuValueExt, cpuValueMed; 
+    Double diskValueMed;
+    Double ramValueExt, ramValueMed;
+    Double virtualValueExt, virtualValueMed;
     /**
      * Creates new form GerenciadorDeTarefas
      */
     public GerenciadorDeTarefas() {
         initComponents();
+        InitValues();
+        PrintValues();
     }
-
+    
     public void InitValues() {
-        ChangeValueCpu();
-        ChangeValueDisk();
-        ChangeValueRam();
-        ChangeValueVirtual();
+        cpuValue = randomNumber.nextInt(101);
+        cpuValueMin = cpuValue;
+        cpuValueMed = Double.valueOf(cpuValue);
+        cpuSumMed = cpuValue;
+        cpuAmountMed = 1;
+        cpuValueMax = cpuValue;
+        
+        diskValue = randomNumber.nextInt(101);
+        diskValueMin = diskValue;
+        diskValueMed = Double.valueOf(diskValue);
+        diskSumMed = diskValue;
+        diskAmountMed = 1;
+        diskValueMax = diskValue;
+        
+        ramValue = randomNumber.nextInt(101);
+        ramValueMin = ramValue;
+        ramValueMed = Double.valueOf(ramValue);
+        ramSumMed = ramValue;
+        ramAmountMed = 1;
+        ramValueMax = ramValue;
+        
+        virtualValue = randomNumber.nextInt(101);
+        virtualValueMin = virtualValue;
+        virtualValueMed = Double.valueOf(virtualValue);
+        virtualSumMed = virtualValue;
+        virtualAmountMed = 1;
+        virtualValueMax = virtualValue;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,8 +167,8 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMedCpu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMedValueCpu, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addComponent(lblMedValueCpu, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblMaxCpu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMaxValueCpu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,7 +252,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(lblMedRam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMedValueRam, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMedValueRam, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMaxRam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,8 +326,8 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMedDisk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMedValueDisk, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addComponent(lblMedValueDisk, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblMaxDisk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMaxValueDisk, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -381,7 +410,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(lblMedVirtual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMedValueVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMedValueVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblMaxVirtual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -470,13 +499,16 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
         ChangeValueDisk();
         ChangeValueRam();
         ChangeValueVirtual();
+        PrintValues();
     }//GEN-LAST:event_btnUpdateActionPerformed
     
     public void ChangeValueCpu() {
         cpuValue = randomNumber.nextInt(101);
-        Double cpuValueExt = (Double.valueOf(cpuValue) * 2) / 100;
+        cpuValueExt = (Double.valueOf(cpuValue) * 2) / 100;
         
-        Integer cpuValueMed = (cpuSumMed + cpuValue) / (cpuAmountMed++);
+        cpuSumMed += cpuValue;
+        cpuAmountMed++;
+        cpuValueMed = Double.valueOf(cpuSumMed) / cpuAmountMed;
         
         if (cpuValueMin > cpuValue) {
             cpuValueMin = cpuValue;
@@ -485,17 +517,13 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
         if (cpuValueMax < cpuValue) {
             cpuValueMax = cpuValue;
         }
-        
-        jpbCpu.setValue(cpuValue);
-        lblValueCpuExt.setText(String.format("%.2fGHz",cpuValueExt));
-        lblMinValueCpu.setText(String.format("%d%%", cpuValueMin));
-        lblMedValueCpu.setText(String.format("%d%%", cpuValueMed));
-        lblMaxValueCpu.setText(String.format("%d%%", cpuValueMax));
     }
     public void ChangeValueDisk(){
         diskValue = randomNumber.nextInt(101);
         
-        Integer diskValueMed = (diskSumMed + diskValue) / (diskAmountMed++);
+        diskSumMed += diskValue;
+        diskAmountMed++;
+        diskValueMed = Double.valueOf(diskSumMed) / diskAmountMed;
         
         if(diskValueMin > diskValue) {
            diskValueMin = diskValue; 
@@ -503,18 +531,15 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
     
         if(diskValueMax < diskValue) {
             diskValueMax = diskValue;
-        }
-        
-        jpbDisk.setValue(diskValue);
-        lblMinValueDisk.setText(String.format("%d%%", diskValueMin));
-        lblMedValueDisk.setText(String.format("%d%%", diskValueMed));
-        lblMaxValueDisk.setText(String.format("%d%%", diskValueMax));
+        }         
     }
     public void ChangeValueRam() {
        ramValue = randomNumber.nextInt(101);
-       Double ramValueExt = (Double.valueOf(ramValue) * 8) / 100;
+       ramValueExt = (Double.valueOf(ramValue) * 8) / 100;
        
-       Integer ramValueMed = (ramSumMed + ramValue) / (ramAmountMed++);
+       ramSumMed += ramValue;
+       ramAmountMed++;
+       ramValueMed = Double.valueOf(ramSumMed) / ramAmountMed;
        
        if (ramValueMin > ramValue) {
            ramValueMin = ramValue;
@@ -522,19 +547,15 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
        
        if (ramValueMax < ramValue) {
            ramValueMax = ramValue;
-       }
-       
-       jpbRam.setValue(ramValue);
-       lblValueRamExt.setText(String.format("%.2fGB", ramValueExt));
-       lblMinValueRam.setText(String.format("%d%%", ramValueMin));
-       lblMedValueRam.setText(String.format("%d%%", ramValueMed));
-       lblMaxValueRam.setText(String.format("%d%%", ramValueMax));
+       }              
     }
     public void ChangeValueVirtual() {
         virtualValue = randomNumber.nextInt(101);
-        Double virtualValueExt = (Double.valueOf(virtualValue) * 4) / 100;
+        virtualValueExt = (Double.valueOf(virtualValue) * 4) / 100;
         
-        Integer virtualValueMed = (virtualSumMed + virtualValue) / (virtualAmountMed++);
+        virtualSumMed += virtualValue;
+        virtualAmountMed++;
+        virtualValueMed = Double.valueOf(virtualSumMed) / virtualAmountMed;
        
        if (virtualValueMin > virtualValue) {
            virtualValueMin = virtualValue;
@@ -542,12 +563,34 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
        
        if (virtualValueMax < virtualValue) {
            virtualValueMax = virtualValue;
-       }
+       }              
+    }
+    public void PrintValues() {
+        //Print Values CPU
+        jpbCpu.setValue(cpuValue);
+        lblValueCpuExt.setText(String.format("%.2fGHz",cpuValueExt));
+        lblMinValueCpu.setText(String.format("%d%%", cpuValueMin));
+        lblMedValueCpu.setText(String.format("%.2f%%", cpuValueMed));
+        lblMaxValueCpu.setText(String.format("%d%%", cpuValueMax));
+        
+        //Print Values Disk
+        jpbDisk.setValue(diskValue);
+        lblMinValueDisk.setText(String.format("%d%%", diskValueMin));
+        lblMedValueDisk.setText(String.format("%.2f%%", diskValueMed));
+        lblMaxValueDisk.setText(String.format("%d%%", diskValueMax));
+        
+        //Print Values RAM
+        jpbRam.setValue(ramValue);
+       lblValueRamExt.setText(String.format("%.2fGB", ramValueExt));
+       lblMinValueRam.setText(String.format("%d%%", ramValueMin));
+       lblMedValueRam.setText(String.format("%.2f%%", ramValueMed));
+       lblMaxValueRam.setText(String.format("%d%%", ramValueMax));
        
+       //Print Values Virtual
        jpbVirtual.setValue(virtualValue);
        lblValueVirtualExt.setText(String.format("%.2fGB", virtualValueExt));
        lblMinValueVirtual.setText(String.format("%d%%", virtualValueMin));
-       lblMedValueVirtual.setText(String.format("%d%%", virtualValueMed));
+       lblMedValueVirtual.setText(String.format("%.2f%%", virtualValueMed));
        lblMaxValueVirtual.setText(String.format("%d%%", virtualValueMax));
     }
     /**
