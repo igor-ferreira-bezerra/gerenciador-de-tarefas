@@ -28,11 +28,11 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
      */
     public GerenciadorDeTarefas() {
         initComponents();
-        InitValues();
-        PrintValues();
+        initValues();
+        printValues();
     }
     
-    public void InitValues() {
+    public void initValues() {
         cpuValue = randomNumber.nextInt(101);
         cpuValueMin = cpuValue;
         cpuValueMed = Double.valueOf(cpuValue);
@@ -495,14 +495,14 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        ChangeValueCpu();
-        ChangeValueDisk();
-        ChangeValueRam();
-        ChangeValueVirtual();
-        PrintValues();
+        changeValueCpu();
+        changeValueDisk();
+        changeValueRam();
+        changeValueVirtual();
+        printValues();
     }//GEN-LAST:event_btnUpdateActionPerformed
     
-    public void ChangeValueCpu() {
+    public void changeValueCpu() {
         cpuValue = randomNumber.nextInt(101);
         cpuValueExt = (Double.valueOf(cpuValue) * 2) / 100;
         
@@ -518,7 +518,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
             cpuValueMax = cpuValue;
         }
     }
-    public void ChangeValueDisk(){
+    public void changeValueDisk(){
         diskValue = randomNumber.nextInt(101);
         
         diskSumMed += diskValue;
@@ -533,7 +533,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
             diskValueMax = diskValue;
         }         
     }
-    public void ChangeValueRam() {
+    public void changeValueRam() {
        ramValue = randomNumber.nextInt(101);
        ramValueExt = (Double.valueOf(ramValue) * 8) / 100;
        
@@ -549,7 +549,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
            ramValueMax = ramValue;
        }              
     }
-    public void ChangeValueVirtual() {
+    public void changeValueVirtual() {
         virtualValue = randomNumber.nextInt(101);
         virtualValueExt = (Double.valueOf(virtualValue) * 4) / 100;
         
@@ -565,7 +565,7 @@ public class GerenciadorDeTarefas extends javax.swing.JFrame {
            virtualValueMax = virtualValue;
        }              
     }
-    public void PrintValues() {
+    public void printValues() {
         //Print Values CPU
         jpbCpu.setValue(cpuValue);
         lblValueCpuExt.setText(String.format("%.2fGHz",cpuValueExt));
